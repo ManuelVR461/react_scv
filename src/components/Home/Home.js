@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthContext from '../AuthContext';
+import AuthContext from '../../AuthContext';
 import { Button } from '@material-ui/core';
 
 export const Home = () => {

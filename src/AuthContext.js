@@ -25,6 +25,7 @@ const Provider = ({children}) => {
             } else {
                 console.log("no estoy login")
                 window.sessionStorage.removeItem('user');
+                setIsAuth(false)
             }
         });
     },[])
@@ -54,6 +55,7 @@ const Provider = ({children}) => {
     }
 
     const logout = (e) => {
+        console.log("logout")
         e.preventDefault();
         auth.signOut();
         window.sessionStorage.removeItem('user');
