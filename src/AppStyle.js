@@ -1,10 +1,16 @@
 import { makeStyles } from "@material-ui/core";
+const drawerWidth = 240;
 
-export const useStyles = makeStyles((theme) => ({
+export const appStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+    },
     header: {
+        //width : `calc(100% - ${drawerWidth}px)`,
         backgroundColor: "#400CCC",
         "@media (max-width: 900px)": {
-        paddingLeft: 0,
+            paddingLeft: 0,
+            marginLeft: drawerWidth,
         },
     },
     logo: {
@@ -26,7 +32,16 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
     },
     drawerContainer: {
-        padding: "20px 30px",
+        width: drawerWidth,
+        flexShrink:0,
+    },
+    drawerPaper: {
+        width: drawerWidth,
     },
     offset: theme.mixins.toolbar,
+    content: {
+        flexGrow:1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing(3),
+    }
 }));

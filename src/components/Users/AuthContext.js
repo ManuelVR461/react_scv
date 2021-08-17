@@ -1,10 +1,10 @@
-import React, { createContext, useState, useEffect } from 'react';
-import firebase from './firebase';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import firebase from '../../firebase';
 
 
-export const AuthContext = createContext()
+const AuthContext = createContext()
 
-const Provider = ({children}) => {
+export const UserProvider = ({children}) => {
     const auth = firebase.auth();
     const [email, setEmail]= useState();
     const [password, setPassword]= useState();
@@ -63,19 +63,20 @@ const Provider = ({children}) => {
     }
 
     return <AuthContext.Provider value={{
-        isAuth,
-        login,
-        emailChange,
-        passwordChange,
-        logout
-    }}>
+            isAuth,
+            login,
+            logout,
+            emailChange,
+            passwordChange
+        }}>
         {children}
     </AuthContext.Provider>
 }
 
-const ObjeContext = {
-    Provider,
-    Consumer: AuthContext.Consumer
-};
-
-export default ObjeContext;
+export function useAuthContext (){
+    const context = useContext(AuthContext);
+    if (!context){
+        throw new Error("Context no existe");
+    }
+    return context;
+}

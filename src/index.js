@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import AuthContext from "./AuthContext";
+import { UserProvider } from './components/Users/AuthContext';
 
 ReactDOM.render(
-  <AuthContext.Provider>
+  <UserProvider>
       {/* <React.StrictMode> momentaneamente hasta que se soluciones por parte de react */}
         <App />
       {/* </React.StrictMode> */}
-  </AuthContext.Provider>,
+  </UserProvider>,
   document.getElementById('root')
 );
