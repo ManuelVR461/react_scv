@@ -1,35 +1,23 @@
 import React from 'react';
+import { appStyles } from '../Config/AppStyle'
+import { useDBContext } from '../Config/DBProvider';
 import { Link as RouterLink } from "react-router-dom";
 import { Drawer, List,ListItem,ListItemIcon,ListItemText,Divider } from "@material-ui/core";
-import { appStyles } from "../../AppStyle";
-import { useNavContext } from "./NavContext";
+
 import HomeIcon from '@material-ui/icons/Home';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 
 export const NavLeft = () => {
-     const headersData = [
-         {
-            label: "Home",
-            href: "/Home",
-            icon: <HomeIcon/>
-        },
-        {
-            label: "Usuarios",
-            href: "/users",
-            icon: <LocalCafeIcon/>
-        },
-        {
-            label: "Clientes",
-            href: "/clients",
-            icon: <PermIdentityIcon/>
-        }
-    ];
-    const {drawerOpen,handleDrawerClose } = useNavContext();
+    const { drawerOpen, handleDrawerClose } = useDBContext();
     const { drawerContainer,offset,drawerPaper } = appStyles();
+    const headersData = [
+                            { label: "Home", href: "/Home", icon: <HomeIcon/> },
+                            { label: "Usuarios", href: "/users", icon: <LocalCafeIcon/>},
+                            { label: "Clientes", href: "/clients", icon: <PermIdentityIcon/>}
+                        ];
 
     const getDrawerList = () => {
-
         return headersData.map(({ label, href, icon }) => {
             return (
                 <ListItem button

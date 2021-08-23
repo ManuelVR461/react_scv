@@ -1,27 +1,32 @@
-import React from 'react';
-import {ThemeProvider} from '@material-ui/core/styles'
-import theme from './themeConfig';
-import Layout from './components/Layout/PageLayout'
-import { useAuthContext } from './components/Users/AuthContext';
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './components/Config/theme';
+import { DBProvider, useDBContext } from './components/Config/DBProvider';
 import { BrowserRouter } from "react-router-dom";
+import Layout from './components/Layout/PageLayout'
 
-
-function App() {
-    const {isAuth} = useAuthContext();
-    console.log("detrusture "+ isAuth)
+const InitApp = () => {
+    const {isAuth} = useDBContext();
 
     if(isAuth==null) {
-        return (<h1>Cargando...</h1 >)
+        return (<h1>Verificando Credenciales...</h1 >)
     }
 
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
-                <Layout/>
+                <Layout />
             </BrowserRouter>
         </ThemeProvider>
+    )
+}
 
-    );
+function App() {
+
+  return (
+      <DBProvider>
+          <InitApp />
+      </DBProvider>
+  );
 }
 
 export default App;
